@@ -1,3 +1,4 @@
+#Given the lists
 daily_sales = \
 """Edith Mcbride   ;,;$1.21   ;,;   white ;,; 
 09/15/17   ,Herbert Tran   ;,;   $7.29;,; 
@@ -106,7 +107,7 @@ green&white;,;09/15/17,   Gail Phelps   ;,;$30.52
 ;,;   $22.66   ;,; green&white&blue;,;09/15/17"""
 
 #------------------------------------------------
-# Start coding below!
+#We want to clean the data in order to make it usabale. First we orginze the lists and delete the unwanted symbols
 daily_sales_replaced = daily_sales.replace(';,;','.')
 daily_transactions = daily_sales_replaced.split(',') 
 #print(daily_transactions)
@@ -122,6 +123,7 @@ for b in daily_transactions_split:
     sub.append(i)
   transactions_clean.append(sub)
 #print(transactions_clean)
+#Then we can organize the information into separate lists for easier comprehension
 customers = []
 sales = []
 thread_sold = []
@@ -132,6 +134,7 @@ for c in transactions_clean:
 #print(customers)
 #print(sales)
 #print(thread_sold)
+#A separate iteration on sales to make its values floats, to alllow mathematical operations
 sub_sales = []
 for s in sales:
   for n in s:
@@ -142,13 +145,14 @@ for s in sales:
   for n in new:
     f = float(n)
   total_sales += f
-#print(total_sales) #took me longer than expected
+#print(total_sales) #took me longer than expected to figure out how
 thread_sold_split = [] 
 for t in thread_sold:
   new = t.split('&')
   for n in new:
     thread_sold_split.append(n)
 #print(thread_sold_split)
+#we can define a function to count each color sold
 def color_count(color):
   color_count = 0
   for color_thread in thread_sold_split:
@@ -156,11 +160,13 @@ def color_count(color):
       color_count += 1
   return (color_count)
 #print(color_count('white'))
+#Finding unique colors
 colors = []
 for c in thread_sold_split:
   if c not in colors:
     colors.append(c)
     colors.sort()
 #print(colors)
+#Printing each color sold and how much
 for color in colors:
   print('Thread Shed sold {0} threads of {1} thread today.'.format(color_count(color),color))
